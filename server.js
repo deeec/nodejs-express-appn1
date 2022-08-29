@@ -4,7 +4,7 @@ const app = express();
 //user系のルータをインポート
 const userRouter = require("./routes/user");
 
-//app.use(express.static("public"));
+app.use(express.static("public"));
 //テンプレートエンジン
 app.set("view engine", "ejs");
 
