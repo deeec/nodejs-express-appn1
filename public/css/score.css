@@ -1,0 +1,11 @@
+a {
+    font-size: 40px;
+    margin-top: 100px;
+    background-color: aquamarine;
+}
+
+.hero{
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+}

@@ -1,30 +1,36 @@
 const express = require("express");
 const app = express();
-
-//user系のルータをインポート
-const userRouter = require("./routes/user");
-
+const mongoose = require("mongoose");//mongooseを使用する宣言
 app.use(express.static("public"));
+app.use(express.json());
+
+//mongoDBに接続
+mongoose.connect(
+    "mongodb+srv://d-hori18:d-hori@cluster0.4v0ab4l.mongodb.net/database1?retryWrites=true&w=majority"
+).
+then(() => console.log("db connected!"))
+.catch((err) => console.log(err));
+
+//データベースアクセスを行うためのミドルウェア
+const question_db = require("./db/question_db")//
+const score_db = require("./db/score_db")//
+
+//コントローラをインポート
+const router = require("./routes/router");
+
+const { showTop } = require("./controllers/homeController");
+
 //テンプレートエンジン
 app.set("view engine", "ejs");
 
-//ルーティング処理をここに記載
-//userのエントリポイントに関してはuserRouterに任せる
-app.use("/user", userRouter);
+//ルーティングの処理はControllerに任せる
+app.use("/pages", router);
 
-//myloggernoの使用宣言：ミドルウェアは一番上で宣言
-//本来は認証情報などを扱う
-app.use(mylogger);
+//トップページを表示
+app.get("/", showTop);
 
-//エントリポイント
-app.get("/", (req, res) => {
-    res.render("index", {text: "textとhtml"});
-});
+//db接続する
+app.use("/api", question_db);
+app.use("/sss", score_db);
 
-//ミドルウェア
-function mylogger(req, res, next){
-    console.log(req.originalUrl);
-    next();
-}
-
-app.listen(process.env.PORT || 3000, () => console.log("server runnnig!!"));
+app.listen(process.env.PORT || 3000, () => console.log("server running"));

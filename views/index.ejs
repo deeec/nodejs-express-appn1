@@ -4,29 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/html" href="../public/style.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css"/>
+    <title>何てもテスト君</title>
 </head>
 <body>
-    hello <%= text %> 
-    <!-- 掲示板のひな型作成 -->
-    <div class="board-section">
-        <h2>NodejsとMongoDBで掲示板</h2>
-        <!-- この中に挿入していく -->
-        <div class="thread-section">
-          
-        </div>
-        <form class="form-section">
-          <p>タイトル</p>
-          <input type="text" placeholder="タイトル" id="inputTitle" />
-          <p>内容</p>
-          <textarea id="inputContent" rows="10" cols="30"></textarea>
-          <br />
-          <button id="submitButton" type="submit">送信</button>
-        </form>
-      </div>
-  
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <!--<script src="script.js"></script>-->
-</body>
+    <!--一番はじめに到達するページ：トップページ-->
+  <div>
+    <nav>
+        <h1>メニュー</h1>
+            <ul>
+                <li><a href="/pages/question">問題</a></li>
+                <li><a href="/pages/score" >成績</a></li>
+                <li><a href="/pages/create">問題作成</a></li>
+            </ul>
+    </nav>
+</div> 
 </html>

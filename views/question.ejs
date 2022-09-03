@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/question.css"/>
+    <title>問題画面</title>
+</head>
+<body>
+  <div class="all">
+    <!--一番はじめに到達するページ：トップページ-->
+  <div class="hero">
+    <div class="queVolZone">
+      <form class="selVol" id="queVolume">
+        <label id="queLab" for="queVol">問題数</label>
+        <select class="selVol" id="queVol">
+          <option value="5">5</option>
+          <option value="5">10</option>
+          <option value="5">30</option>
+          <option value="5">50</option>
+        </select>
+      </form>
+    </div>
+    <div class="que-section">
+      <!--問題をここに挿入する-->
+    </div>
+    <input class="subBtn" type="button" value="完了" onclick="doneTest()">
+</div>
+<div class="Link"><a href="/">トップへ</a></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/que.js"></script>
+</html>

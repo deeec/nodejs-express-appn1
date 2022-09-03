@@ -1,0 +1,62 @@
+.Link {
+    font-size: 40px;
+    margin-top: 20px;
+    background-color: aquamarine;
+    width: fit-content;
+    margin-left: auto;
+    height: min-content;
+}
+
+.subBtn{
+    margin-top: 20px;
+    margin-left: 300px;
+}
+
+.all{
+    display: flex;
+}
+
+.hero{
+    height: fit-content;
+    margin: 0px auto 0px auto;
+    padding: 0px auto 0px auto;
+}
+
+.selVol{
+    font-size: 50px;
+    width: auto;
+    margin: 0px auto 10px auto;
+}
+
+.selVol label{
+    font-size: 50px;
+}
+
+.queVolZone {
+    background-color: azure;
+    box-shadow: 1px 0px 3px #474747;
+    border-radius: 5px;
+    margin: 0px auto 0px auto;
+    padding: 0px 10px 0px 10px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.que-section {
+    margin-left: auto;
+    overflow:auto;
+    height: 350px;
+    padding:5px;
+    border:1px solid #000;
+    background-color:#F9F9F9;
+    color:#000;
+    font-size:12px;
+  }
+  
+  .que-section .single-que {
+    box-shadow: 1px 0px 4px #201f1f;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 30px;
+  }
+  
