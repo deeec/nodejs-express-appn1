@@ -18,6 +18,11 @@ h2 {
   margin-top: 10px;
 }
 
+textarea{
+  width: 100%;
+  height: 75px;
+}
+
 .thread-section {
   margin-left: auto;
   overflow:auto;
