@@ -15,11 +15,12 @@ const getAllThreads = async () => {
     //出力
     allThreads = data
       .map((thread) => {
-        const { _id, content, answer } = thread;
+        const { _id, content, answer, correctFlag } = thread;
         return `
       <div class="single-thread">
         <p>${content}</p>
         <p>${answer}</p>
+        <p>${correctFlag}</p>
         <input type="button" value="削除" id="${_id}" onclick="selectItemDel(id);removeExample(this)">
         </div>
       `;

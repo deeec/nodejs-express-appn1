@@ -4,7 +4,8 @@ const quesOptionDOM = document.getElementById("queVol");
 const subBtnDOM = document.getElementById("subBtnId");
 var singleQueDOM = document.getElementsByClassName("single-que");
 var ckCrrctDOM = document.getElementsByClassName("ckCrrct");
-const heroDOM = document.getElementById("heroId") 
+const heroDOM = document.getElementById("heroId"); 
+const ckWeakDOM = document.getElementById("ckWeakId");
 
 //オプションボタンの選択値:はじめは5で設定
 var optionValue = 5;
@@ -19,8 +20,13 @@ const getAllQuestions = async () => {
   try {
     let array = await axios.get("/api/v1/questions");//パスに沿ってAPIをたたきにいく
     let { data } = array;//マップ関数で扱うために一旦格納
+
+    //TODO:前回間違えたものを選別できるような関数を挿入
+    if(ckWeakDOM.checked == true){
+      data = selWeakQue(data);
+    }
+
     ttlDtNum = data.length;//データの総数を取得
-    //console.log(array)
     var count = -1;//カウンタ変数
     var index = 0;//
     var selected = getRamArray();//対象の問題番号を記載した数字
@@ -32,8 +38,6 @@ const getAllQuestions = async () => {
 
       //TODO：出力するかしないかをここで判断
       if(selected[index] == count) {
-        // console.log(selected[index]);
-        // console.log(count + " " + index); 
         index = index + 1;
 
         return `
@@ -70,6 +74,15 @@ quesOptionDOM.addEventListener("change", async (e) => {
     console.log(err);
   }
 });
+
+//苦手な問題を選別する
+function selWeakQue(data) {
+  var result = data.filter(function( data ) {
+    return data.correctFlag === false;
+  });
+  console.log(result);
+  return result;
+};
 
 //解答ゾーンを開いたり閉じたりする
 function visibleCon(id) {
@@ -144,7 +157,7 @@ async function sendScore() {
 async function updateQueInfo(id, flag) {
   let url = "/api/v1/upd/" + id;
   try {
-    await axios.post(url, {
+    await axios.patch(url, {
       correctFlag: flag,
     });
     getAllQuestions();
