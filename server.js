@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");//mongooseを使用する宣言
-app.use(express.static("public"));
-app.use(express.json());
+app.use(express.static("public"));//静的ファイルをインストール
+app.use(express.json());//
 
 //mongoDBに接続
 mongoose.connect(

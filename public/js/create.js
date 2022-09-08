@@ -54,6 +54,7 @@ formDOM.addEventListener("submit", async (e) => {
         _id: getRandomId(),
         content: contentText,
         answer: answerText,
+        correctFlag: true,//デフォルトはfalseで設定
       });
       getAllThreads();
       
@@ -82,7 +83,7 @@ async function selectItemDel(id, button) {
   }
 }
 
-//
+//自身の親要素を含めて画面から削除する関数
 function removeExample(button) {
   if (window.confirm('本当に削除しますか？')) {
     let parent = button.parentNode;

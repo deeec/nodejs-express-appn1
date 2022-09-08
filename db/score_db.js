@@ -8,7 +8,6 @@ score_db.use(express.json());
 score_db.get("/v1/scores", async(req, res) => {
     try {
         const allScores = await score.find({});
-        console.log(allScores);
         res.status(200).json(allScores);
     } catch (err) {
         console.log(err);
@@ -18,9 +17,7 @@ score_db.get("/v1/scores", async(req, res) => {
 //postメソッド
 score_db.post("/v1/score", async(req, res) => {
     try {
-        console.log("score");
         const createScore = await score.create(req.body);
-        console.log(createScore);
         res.status(200).json(createScore);
     } catch (err) {
         console.log(err);

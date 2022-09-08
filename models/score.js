@@ -5,6 +5,9 @@ const scoreSchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
+    examDate: {
+        type: String,
+    },
 });
 
 //ミドルウェアとしてエクスポート

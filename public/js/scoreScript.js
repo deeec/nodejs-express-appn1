@@ -1,6 +1,5 @@
 //DOM宣言
-const scoreBtnDOM = document.getElementById("score-btn");
-const inputScoreDOM = document.getElementById("inputScore");
+const scoreTableDOM = document.getElementById("score-tableId");
 //代入用変数
 let contentText = "";
 
@@ -8,39 +7,25 @@ let contentText = "";
 const getAllScores = async () => {
   try {
     let allScores = await axios.get("/sss/v1/scores");//パスに沿ってAPIをたたきにいく
+    let {data} = allScores;
+    crtScrBrd(data);
   } catch (err) {
     console.log(err);
   }
 };
+
 //エクスポート
 getAllScores();
 
-//テキストボックスイベント
-inputScoreDOM.addEventListener("change", (e) => {
-  contentText = e.target.value;
-});
-
-//
-scoreBtnDOM.addEventListener("click", async (e) => {
-  e.preventDefault();
-  console.log(contentText);
-  if (contentText) {
-    console.log("success");
-    //postメソッドで送信する。
-    inputScoreDOM.focus();//フォーカスをあてる
-    try {
-      await axios.post("/sss/v1/score", {//req.bodyに該当
-        score: contentText,
-      });
-      getAllScoress();
-    } catch (err) {
-      console.log(err);
-    }
-
-    //投稿したらinputのvalueを削除
-    contentText = "";
-    inputScoreDOM.value = "";
-  } else {
-    console.log("error");
+//成績票を作成する関数
+function crtScrBrd(array) {
+  var lastIndex = array.length - 1;
+  for(var i = 0; i < array.length; i++){
+    const {examDate, score} = array[lastIndex - i];
+    scoreTableDOM.innerHTML += 
+    `<tr>
+    <td>${examDate}</td>
+    <td class="score-point">${score * 100}%</td>
+    </tr>`;
   }
-});
+};

@@ -1,11 +1,47 @@
-a {
+.top-link {
     font-size: 40px;
-    margin-top: 100px;
+    margin-top: 20px;
     background-color: aquamarine;
+    width: fit-content;
+    margin-left: auto;
+    height: min-content;
 }
 
-.hero{
-    height: 100vh;
-    width: 100%;
-    text-align: center;
+.all-score-zone{
+    display: flex;
+    margin-top: 15px;
 }
+
+.score-zone{
+    height: fit-content;
+    margin: 0px auto 0px auto;
+    padding: 0px auto 0px auto;
+}
+
+.score-table th, td{
+    border: 5px;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    line-height: 1.5;
+    border-spacing: 0;
+    margin: 0px 0px 0px 0px;
+}
+
+.score-table th {
+    width: fit-content;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    background-color: lightgray;
+}
+  
+.score-table td {
+    width: fit-content;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.score-point {
+    text-align: end;
+}
+

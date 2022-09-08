@@ -8,12 +8,20 @@
     <title>成績画面</title>
 </head>
 <body>
+  <div class="all-score-zone">
     <!--一番はじめに到達するページ：トップページ-->
-  <div class="hero">
-    <input type="text" placeholder="数字" id="inputScore"/>
-    <button type="submit" id="score-btn">完了</button>
-    <a href="/">トップへ</a>
-</div> 
+    <div class="score-zone" id="score-zoneId">
+      <h2>成績画面</h2>
+      <table class="score-table" id="score-tableId">
+        <tr>
+          <th>実施日時</th>
+          <th class="score-point">正答率</th>
+        </tr>
+        <!--ここにデータを挿入する-->
+      </table>
+    </div>
+    <div class="top-link"><a href="/">トップへ</a></div>
+  </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/scoreScript.js"></script>
 </html>

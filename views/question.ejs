@@ -10,22 +10,24 @@
 <body>
   <div class="all">
     <!--一番はじめに到達するページ：トップページ-->
-  <div class="hero">
-    <div class="queVolZone">
-      <form class="selVol" id="queVolume">
-        <label id="queLab" for="queVol">問題数</label>
-        <select class="selVol" id="queVol">
-          <option value="5">5</option>
-          <option value="5">10</option>
-          <option value="5">30</option>
-          <option value="5">50</option>
-        </select>
-      </form>
+  <div class="hero" id="heroId">
+    <div class="select-zone">
+      <div class="queVolZone">
+        <form class="selVol" id="queVolume">
+          <label id="queLab" for="queVol">問題数</label>
+          <select class="selVol" id="queVol">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+          </select>
+        </form>
+      </div>
+      <input class="subBtn" id="subBtnId" type="button" value="開始" onclick="removeExample(this)">
     </div>
     <div class="que-section">
       <!--問題をここに挿入する-->
     </div>
-    <input class="subBtn" type="button" value="完了" onclick="doneTest()">
 </div>
 <div class="Link"><a href="/">トップへ</a></div>
 </div>

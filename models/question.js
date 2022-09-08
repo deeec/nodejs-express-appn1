@@ -11,7 +11,10 @@ const questionSchema = new mongoose.Schema({
     answer: {
         type: String,
         required: true, 
-    }, 
+    },
+    correctFlag: {
+        type: Boolean
+    },
 });
 
 //ミドルウェアとしてエクスポート

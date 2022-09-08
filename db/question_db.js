@@ -8,6 +8,7 @@ question_db.use(express.json());
 question_db.get("/v1/questions", async(req, res) => {
     try {
         const allQuestions = await question.find({});
+        //console.log(allQuestions);
         res.status(200).json(allQuestions);
     } catch (err) {
         console.log(err);
@@ -28,6 +29,16 @@ question_db.post("/v1/question", async(req, res) => {
 question_db.delete("/v1/:id", async(req, res) => {
     try {
         await question.findByIdAndDelete(req.params.id);
+        res.status(200);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//updatePatchメソッド
+question_db.patch("/v1/upd/:id", async(req, res) => {
+    try {
+        await question.findByIdAndUpdate(req.params.id, req.body);
         res.status(200);
     } catch (err) {
         console.log(err);
