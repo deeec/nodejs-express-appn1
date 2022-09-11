@@ -17,3 +17,9 @@ exports.showScore = (req, res) => {
 exports.showCreate = (req, res) => {
     res.render("create");
 };
+
+//ルートのときはここに来る
+exports.showQuestionDev = (req, res) => {
+    res.render("questionDev");
+};
+

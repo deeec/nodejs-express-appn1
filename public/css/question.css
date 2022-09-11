@@ -6,7 +6,7 @@
     height: min-content;
 }
 
-.subBtn{
+.subBtn {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 20px;
@@ -19,7 +19,11 @@
     margin-top: 30px;
 }
 
-.ckCrrct {
+.ckCrrct{
+    vertical-align: middle;
+}
+
+.ckCrrct2{
     vertical-align: middle;
 }
 
@@ -90,7 +94,16 @@ textarea{
     display: flex;
 }
 
-.que-section {
+
+  
+  .que-section .single-que {
+    box-shadow: 1px 0px 4px #201f1f;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 20px 10px; 
+  }
+
+  .que-section2 {
     margin-left: auto;
     overflow:auto;
     height: 350px;
@@ -101,7 +114,7 @@ textarea{
     font-size:12px;
   }
   
-  .que-section .single-que {
+  .que-section2 .single-que2 {
     box-shadow: 1px 0px 4px #201f1f;
     border-radius: 5px;
     padding: 10px 10px 10px 10px;

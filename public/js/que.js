@@ -1,9 +1,11 @@
 //formDomを追加する。
 const questionDOM = document.querySelector(".que-section");
+const questionDOM2 = document.querySelector(".que-section2");
 const quesOptionDOM = document.getElementById("queVol");
 const subBtnDOM = document.getElementById("subBtnId");
 var singleQueDOM = document.getElementsByClassName("single-que");
 var ckCrrctDOM = document.getElementsByClassName("ckCrrct");
+var ckCrrctDOM2 = document.getElementsByClassName("ckCrrct2");
 const heroDOM = document.getElementById("heroId"); 
 const ckWeakDOM = document.getElementById("ckWeakId");
 
@@ -11,20 +13,18 @@ const ckWeakDOM = document.getElementById("ckWeakId");
 var optionValue = 5;
 var ttlDtNum;
 var tempScore;
+var hardFlag = false;
+let array = "";
 
 //questionDOMを最初は非表示
 questionDOM.style.display = "none";
+questionDOM2.style.display = "none";
 
 //最初はThreadを全て読み込む
 const getAllQuestions = async () => {
   try {
-    let array = await axios.get("/api/v1/questions");//パスに沿ってAPIをたたきにいく
+    array = await axios.get("/api/v1/questions");//パスに沿ってAPIをたたきにいく
     let { data } = array;//マップ関数で扱うために一旦格納
-
-    //TODO:前回間違えたものを選別できるような関数を挿入
-    if(ckWeakDOM.checked == true){
-      data = selWeakQue(data);
-    }
 
     ttlDtNum = data.length;//データの総数を取得
     var count = -1;//カウンタ変数
@@ -48,7 +48,8 @@ const getAllQuestions = async () => {
           <input type="button" value="解答" onclick=visibleCon("${_id}")>
           <div class="ans-zone" id=${_id}>
           <p class="ansBtn">${answer}</p>
-          <label><input class="ckCrrct" value=${_id} type="checkbox">正解時チェック</label>
+          <label><input class="ckCrrct" id=${_id} type="checkbox" onclick=updateQueInfoT(this)>正解</label>
+          <label><input class="ckCrrct" id=${_id} type="checkbox" onclick=updateQueInfoF(this)>不正解</label>
           </div>
         </div>
       `;
@@ -57,6 +58,7 @@ const getAllQuestions = async () => {
     .join("");
     //挿入
     questionDOM.innerHTML = array;
+    console.log(array);
   } catch (err) {
     console.log(err);
   }
@@ -64,25 +66,17 @@ const getAllQuestions = async () => {
 
 getAllQuestions();//エクスポートする
 
-
-//optionボタンイベント
-quesOptionDOM.addEventListener("change", async (e) => {
-  optionValue = Number( e.target.value );
-  try {
-    getAllQuestions();
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 //苦手な問題を選別する
 function selWeakQue(data) {
-  var result = data.filter(function( data ) {
-    return data.correctFlag === false;
-  });
-  console.log(result);
-  return result;
+  for(var i = 0; i < data.length; i++) {
+    if(data[i].correctFlag) {
+      data.splice(i, 1);
+      i = i - 1;
+    }
+  }
+  return data;
 };
+
 
 //解答ゾーンを開いたり閉じたりする
 function visibleCon(id) {
@@ -94,7 +88,7 @@ function visibleCon(id) {
 };
 
 //開始ボタン押下時
-async function testStart() {
+function testStart() {
   questionDOM.style.display = "block";
   document.getElementById("heroId").innerHTML +=
    `<input class="subBtn2" type="button" value="終了" onclick="checkCorrect();sendScore()">`;
@@ -103,14 +97,11 @@ async function testStart() {
 //正誤をつける関数
 async function checkCorrect() {
   var correctNum = 0;
+
   for(var i = 0; i < ckCrrctDOM.length; i++) {
-    //console.log(ckCrrctDOM[i].checked + " " + ckCrrctDOM[i].value);
     //正解のとき
     if(ckCrrctDOM[i].checked == true) {
       correctNum = correctNum + 1;
-      updateQueInfo(ckCrrctDOM[i].value, true);
-    } else {//不正解のときはフラグをfalseで更新
-      updateQueInfo(ckCrrctDOM[i].value, false);
     }
   }
   //成績を保持
@@ -128,7 +119,6 @@ async function checkCorrect() {
 //日付を文字列で取得
 function getDateStr() {
   var now = new Date();
-  console.log(now);
 
   var Year = now.getFullYear();
   var Month = now.getMonth()+1;
@@ -153,12 +143,26 @@ async function sendScore() {
   }
 };
 
-//問題の正誤結果を送信する関数
-async function updateQueInfo(id, flag) {
-  let url = "/api/v1/upd/" + id;
+async function updateQueInfoF(ele) {
+  let url = "/api/v1/upd/" + ele.id;
+
   try {
     await axios.patch(url, {
-      correctFlag: flag,
+      correctFlag: false,
+    });
+    getAllQuestions();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//問題の正解を送信する関数
+async function updateQueInfoT(ele) {
+  let url = "/api/v1/upd/" + ele.id;
+
+  try {
+    await axios.patch(url, {
+      correctFlag: true,
     });
     getAllQuestions();
   } catch (err) {
@@ -176,8 +180,9 @@ function removeExample(button) {
   if (window.confirm('テストを開始してもよろしいですか？')) {
     let parent = button.parentNode;
     parent.remove();
-
+    shokikaFlag = true;
     testStart();//テスト開始
+    //getAllQuestions();
   }
 }
 

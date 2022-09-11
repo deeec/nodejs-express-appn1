@@ -8,5 +8,7 @@ const router = express.Router();
 router.get("/score", homeController.showScore);
 router.get("/question", homeController.showQuestion)
 router.get("/create", homeController.showCreate)
+router.get("/questionDev", homeController.showQuestionDev)
+
 
 module.exports = router;

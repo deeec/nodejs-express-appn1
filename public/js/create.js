@@ -20,7 +20,7 @@ const getAllThreads = async () => {
       <div class="single-thread">
         <p>${content}</p>
         <p>${answer}</p>
-        <p>${correctFlag}</p>
+        <p>${getDismiss(correctFlag)}</p>
         <input type="button" value="削除" id="${_id}" onclick="selectItemDel(id);removeExample(this)">
         </div>
       `;
@@ -58,6 +58,7 @@ formDOM.addEventListener("submit", async (e) => {
         correctFlag: true,//デフォルトはfalseで設定
       });
       getAllThreads();
+      console.log("更新");
       
     } catch (err) {
       console.log(err);
@@ -72,6 +73,15 @@ formDOM.addEventListener("submit", async (e) => {
     console.log("error");
   }
 });
+
+//前回の不正解正解情報を返す
+function getDismiss(flag){
+  if(flag){
+    return "前回:〇";
+  } else{
+    return "前回:×";
+  }
+}
 
 async function selectItemDel(id, button) {
   let url = "/api/v1/" + id;

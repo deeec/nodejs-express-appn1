@@ -1,5 +1,6 @@
 //DOM宣言
 const scoreTableDOM = document.getElementById("score-tableId");
+const freeZoneDOM = document.querySelector(".free-zone");
 //代入用変数
 let contentText = "";
 
@@ -29,3 +30,8 @@ function crtScrBrd(array) {
     </tr>`;
   }
 };
+
+document.getElementById("free-zone-bt").addEventListener("click", () => {
+  var rd = Math.floor( Math.random() * 10 );
+  freeZoneDOM.innerHTML = `<h3>DummyText-${rd}</h3>`;
+})
